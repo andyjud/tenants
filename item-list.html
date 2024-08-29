@@ -4,7 +4,7 @@
     {% endfor %}
 </ul>
 
-<form method="POST"
+<form 
     hx-post="{% url 'create-item' %}" 
     hx-target="#item-list" 
     hx-swap="beforeend" 
