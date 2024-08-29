@@ -1,6 +1,6 @@
 #### Commands:
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-docker compose up -d
+python3 -m venv venv <br/>
+source venv/bin/activate <br/>
+pip install --upgrade pip <br/>
+pip install -r requirements.txt <br/>
+docker compose up -d <br/>
