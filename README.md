@@ -5,3 +5,4 @@ source venv/bin/activate <br/>
 pip install --upgrade pip <br/>
 pip install -r requirements.txt <br/>
 docker compose up -d <br/>
+pip install psycopg2-binary <br/>
