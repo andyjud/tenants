@@ -1,0 +1,17 @@
+<ul id="item-list" class="mb-10">
+    {% for item in items %}
+    <li class="text-8xl font-thin">{{ item.name }}</li>
+    {% endfor %}
+</ul>
+
+<form method="POST"
+    hx-post="{% url 'create-item' %}" 
+    hx-target="#item-list" 
+    hx-swap="beforeend" 
+    _="on htmx:afterRequest reset() me" >
+    {% csrf_token %}
+    <div class="flex gap-5 max-w-lg ">
+        <input type="text" name="name" placeholder="Add Item" autofocus />
+        <button>Submit</button>
+    </div>
+</form>
