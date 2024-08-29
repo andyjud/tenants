@@ -10,3 +10,5 @@ pip install psycopg2-binary <br/>
 python manage.py migrate <br/>
 python manage.py createsuperuser <br/>
 python manage.py runserver <br/>
+ctrl + c <br/>
+python manage.py makemigrations
