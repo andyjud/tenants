@@ -9,3 +9,4 @@ docker compose up -d <br/>
 pip install psycopg2-binary <br/>
 python manage.py migrate <br/>
 python manage.py createsuperuser <br/>
+python manage.py runserver <br/>
