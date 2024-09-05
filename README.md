@@ -11,4 +11,11 @@ python manage.py migrate <br/>
 python manage.py createsuperuser <br/>
 python manage.py runserver <br/>
 ctrl + c <br/>
-python manage.py makemigrations
+python manage.py makemigrations<br/>
+<br/>
+##### Part 2:
+pip install django-tenants <br/>
+python manage.py startapp a_tenant_manager <br/>
+python manage.py startapp a_tenant_manager <br/>
+python manage.py create_tenant <br/>
+python manage.py create_tenant_superuser <br/>
