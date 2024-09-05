@@ -16,6 +16,5 @@ python manage.py makemigrations<br/>
 ##### Part 2:
 pip install django-tenants <br/>
 python manage.py startapp a_tenant_manager <br/>
-python manage.py startapp a_tenant_manager <br/>
 python manage.py create_tenant <br/>
 python manage.py create_tenant_superuser <br/>
