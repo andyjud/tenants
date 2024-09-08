@@ -1,4 +1,4 @@
-class CustomTenantsDirectory(TenantFileSystemStorage):
+class CustomTenantStorage(TenantFileSystemStorage):
     tenants_dir = 'tenants'
     
     def __init__(self, schema_name, *args, **kwargs):
