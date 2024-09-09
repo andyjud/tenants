@@ -21,3 +21,7 @@ class CustomSchemaStorage:
     def generate_filename(self, name):
         storage_backend = self._get_storage_backend()
         return storage_backend.generate_filename(name)
+
+    def delete(self, name):
+        storage_backend = self._get_storage_backend()
+        storage_backend.delete(name)
