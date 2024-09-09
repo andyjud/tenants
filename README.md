@@ -18,3 +18,8 @@ pip install django-tenants <br/>
 python manage.py startapp a_tenant_manager <br/>
 python manage.py create_tenant <br/>
 python manage.py create_tenant_superuser <br/>
+<br/>
+##### Part 3:
+pip install django-colorfield <br/>
+{% if color %}style="background-color: {{ color }};"{% endif %} <br/>
+{% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %} <br/>
