@@ -23,3 +23,12 @@ python manage.py create_tenant_superuser <br/>
 pip install django-colorfield <br/>
 {% if color %}style="background-color: {{ color }};"{% endif %} <br/>
 {% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %} <br/>
+##### Part 4:
+pip install gunicorn <br/>
+pip install django-environ <br/>
+pip install whitenoise <br/>
+python manage.py collectstatic <br/>
+pip freeze > requirements.txt <br/>
+pip install django-storages <br/>
+pip install boto3 <br/>
+python manage.py migrate_schemas --schema=schema-name <br/>
