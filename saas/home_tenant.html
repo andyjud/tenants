@@ -1,0 +1,79 @@
+{% extends 'layouts/blank.html' %}
+
+{% block content %} 
+
+    <div class="max-w-4xl mx-auto px-8 py-24">
+        <h1>Welcome to {{ request.tenant.name }}</h1>
+
+        {% if user.is_authenticated %}
+            <h2>Hello {{ request.user.profile.name }}</h2>
+            {% if not tenant_profile %}
+            <p>To access this site, select your role:</p>
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <div class="flex gap-6 mt-8">
+                <div class="w-1/2">
+                    <form method="POST" action="{% url 'role' %}">
+                        {% csrf_token %}
+
+                        <div class="relative">
+                            <select name="role" id="role" class="block w-full p-4 pr-10 border border-gray-300 rounded-lg cursor-pointer appearance-none">
+                                <option value="" disabled selected>Select your Role</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Designer">Designer</option>
+                                <option value="Programmer">Programmer</option>
+                            </select>
+
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.292 7.293a1 1 0 011.415 0L10 10.585l3.293-3.292a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="tenant" value="{{ request.tenant.schema_name }}">
+
+                        <button type="submit">Submit</button>
+                        
+                    </form>
+                </div>
+
+                <div class="mb-6 w-1/2">
+                    {% if tenant_profile %}
+                    <div class="p-4 border border-gray-300 rounded-lg">
+                        <div class="mb-6">
+                            <h2>Managers:</h2>
+                            {% for profile in tenant_profiles %}
+                                {% if profile.role == 'manager' %}
+                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="mb-6">
+                            <h2>Designers:</h2>
+                            {% for profile in tenant_profiles %}
+                                {% if profile.role == 'designer' %}
+                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="mb-6">
+                            <h2>Programmers:</h2>
+                            {% for profile in tenant_profiles %}
+                                {% if profile.role == 'programmer' %}
+                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <button><a href="{% url 'account_login' %}">Log In</a></button>
+        {% endif %}
+    </div>
+
+{% endblock %}
