@@ -9,10 +9,6 @@ class TenantForm(ModelForm):
     class Meta:
         model = Tenant
         fields = ['name', 'schema_name']
-        labels = {
-            'name' : 'Name',
-            'schema_name' : 'Schema Name',
-        }
         widgets = {
             'name' : forms.TextInput(attrs={'placeholder': 'Add Name ...'}),
             'schema_name' : forms.TextInput(attrs={'placeholder': 'Add Subdomain ...'}),
