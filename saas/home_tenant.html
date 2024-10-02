@@ -15,7 +15,7 @@
         {% if user.is_authenticated %}
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
-                    <form method="POST" action="{% url 'role' %}">
+                    <form method="POST" action="{% url 'member-role' %}">
                         {% csrf_token %}
 
                         <div class="relative">
@@ -36,7 +36,7 @@
                         <input type="hidden" name="tenant" value="{{ request.tenant.schema_name }}">
 
                         <button type="submit">Submit</button>
-                        
+
                     </form>
                 </div>
 
