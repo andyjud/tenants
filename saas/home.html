@@ -1,0 +1,67 @@
+{% extends 'layouts/blank.html' %}
+
+{% block content %} 
+
+    <div class="max-w-4xl mx-auto px-8 py-24">
+        <h1>Welcome</h1>
+        {% if user.is_authenticated %}
+        <div class="w-full mt-8 flex gap-6">
+            
+            <!-- Organization and Role Selection Form -->
+            <div class="w-1/2">
+                <div class="mb-6">
+                    <div x-data="{ open: false, selectedTenant: '' }" class="relative">
+                        <!-- Trigger Button -->
+                        <div @click="open = !open" class="flex items-center justify-between block w-full p-4 border border-gray-300 rounded-lg cursor-pointer">
+                            My Tenants
+                            <img x-bind:class="open && 'rotate-180 duration-300'" class="w-4" src="https://img.icons8.com/small/32/000000/expand-arrow.png" alt="Dropdown" />
+                        </div>
+                    
+                        <!-- Dropdown Menu -->
+                        <div x-show="open" x-cloak @click.outside="open = false" class="absolute w-full border border-gray-300 rounded-lg shadow-lg z-10">
+                            <ul>
+                                {% if tenants %}
+                                    {% for tenant in tenants %}
+                                    <li>
+                                        <a href = 'http://{{ tenant.schema_name }}.localhost:8000' class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">
+                                            {{ tenant.name }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>
+                                        <div class="block px-4 py-2 text-gray-400">No Tenants yet</div>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Organization Creation Form -->
+            <div class="w-1/2 rounded-lg border border-gray-300 px-6 py-4">
+                <h2>Create new Tenant</h2>
+                <div class="mt-3">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ tenant_form.as_p }}
+                        {% if tenant_form.schema_name.errors %}
+                            <div class="error">{{ tenant_form.schema_name.errors }}</div>
+                        {% endif %}
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                            Create
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <button>
+            <a href="{% url 'account_login' %}">Log In</a>
+        </button>
+        {% endif %}
+    </div>
+
+{% endblock %}
