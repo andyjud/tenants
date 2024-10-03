@@ -5,13 +5,14 @@
     <div class="max-w-4xl mx-auto px-8 py-24">
         <h1>Welcome to {{ request.tenant.name }}</h1>
 
-        {% if user.is_authenticated %}  
-            <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
-            
-            {% if not user.tenant_member %}
-            <p>o access this site, select your role:</p>
+        {% if user.is_authenticated %}
+            <h2>Hello {{ request.user.profile.name }}</h2>
+            {% if not tenant_profile %}
+            <p>To access this site, select your role:</p>
             {% endif %}
+        {% endif %}
 
+        {% if user.is_authenticated %}
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
                     <form method="POST" action="{% url 'member-role' %}">
@@ -19,7 +20,7 @@
 
                         <div x-data="{ selectedRole: '', open: false }" class="relative">
                             <div @click="open = !open" class="flex items-center justify-between block w-full p-4 border border-gray-300 rounded-lg cursor-pointer">
-                                <span x-text="selectedRole ? selectedRole : 'Select your Role'"></span>
+                                <span x-text="selectedRole ? selectedRole : 'My Role'"></span>
                                 <img x-bind:class="open && 'rotate-180 duration-300'" class="w-4" src="https://img.icons8.com/small/32/000000/expand-arrow.png" alt="Dropdown" />
                             </div>
                         
