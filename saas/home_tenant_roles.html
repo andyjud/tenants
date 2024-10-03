@@ -7,7 +7,7 @@
 
         {% if user.is_authenticated %}
             <h2>Hello {{ request.user.profile.name }}</h2>
-            {% if not tenant_profile %}
+            {% if not user.tenant_member %}
             <p>To access this site, select your role:</p>
             {% endif %}
         {% endif %}
@@ -47,29 +47,29 @@
                 </div>
 
                 <div class="mb-6 w-1/2">
-                    {% if tenant_profile %}
+                    {% if user.tenant_member %}
                     <div class="p-4 border border-gray-300 rounded-lg">
                         <div class="mb-6">
                             <h2>Managers:</h2>
-                            {% for profile in tenant_profiles %}
-                                {% if profile.role == 'manager' %}
-                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                            {% for member in tenant_members %}
+                                {% if member.role == 'manager' %}
+                                    <a class="block hover:underline" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
                         <div class="mb-6">
                             <h2>Designers:</h2>
-                            {% for profile in tenant_profiles %}
-                                {% if profile.role == 'designer' %}
-                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                            {% for member in tenant_members %}
+                                {% if member.role == 'designer' %}
+                                    <a class="block hover:underline" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <div class="mb-6">
+                        <div>
                             <h2>Programmers:</h2>
-                            {% for profile in tenant_profiles %}
-                                {% if profile.role == 'programmer' %}
-                                    <a class="block hover:underline" href="{% url 'profile' profile.user.username %}">{{ profile.user.profile.name }}</a>
+                            {% for member in tenant_members %}
+                                {% if member.role == 'programmer' %}
+                                    <a class="block hover:underline" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
