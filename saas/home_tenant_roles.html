@@ -5,16 +5,13 @@
     <div class="max-w-4xl mx-auto px-8 py-24">
         <h1>Welcome to {{ request.tenant.name }}</h1>
 
-        {% if user.is_authenticated %}
-        
+        {% if user.is_authenticated %}  
             <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
-        
-            {% if not tenant_profile %}
-            <p>To access this site, select your role:</p>
+            
+            {% if not user.tenant_member %}
+            <p>o access this site, select your role:</p>
             {% endif %}
-        {% endif %}
 
-        {% if user.is_authenticated %}
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
                     <form method="POST" action="{% url 'member-role' %}">
