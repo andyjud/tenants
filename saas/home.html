@@ -44,9 +44,6 @@
                     <form method="POST">
                         {% csrf_token %}
                         {{ tenant_form.as_p }}
-                        {% if tenant_form.schema_name.errors %}
-                            <div class="error">{{ tenant_form.schema_name.errors }}</div>
-                        {% endif %}
                         <button type="submit">Create</button>
                     </form>
                 </div>
