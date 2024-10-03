@@ -41,7 +41,7 @@
             <div class="w-1/2 rounded-lg border border-gray-300 px-6 py-4">
                 <h2>Create new Tenant</h2>
                 <div class="mt-3">
-                    <form method="POST">
+                    <form method="POST" action="create-tenant">
                         {% csrf_token %}
                         {{ tenant_form.as_p }}
                         <button type="submit">Create</button>
