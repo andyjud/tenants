@@ -6,11 +6,13 @@
         <h1>Welcome to {{ request.tenant.name }}</h1>
 
         {% if user.is_authenticated %}
-            <h2>Hello {{ request.user.profile.name }}</h2>
+            <h2>Hello {{ user.profile.name }}
+                {% if user.tenant_member.is_admin %}
+                - you are the Admin
+                {% endif %}
+            </h2>
 
-            {% if user.tenant_member.is_admin %}
-            <p>You are the Admin</p>
-            {% elif not user.tenant_member %}
+            {% if not user.tenant_member %}
             <p>To access this site, select your role:</p>
             {% endif %}
         
