@@ -6,7 +6,7 @@
         <h1>Welcome to {{ request.tenant.name }}</h1>
 
         {% if user.is_authenticated %}
-            <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
+            <h2>Hello {{ user.profile.name }}{% if tenant_member.is_admin %} (Admin){% endif %}</h2>
 
             {% if tenant_member %}Great to have you!{% endif %}
             
