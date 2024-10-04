@@ -8,7 +8,9 @@
         {% if user.is_authenticated %}
             <h2>Hello {{ user.profile.name }}{% if tenant_member.is_admin %} (Admin){% endif %}</h2>
 
-            {% if tenant_member %}Great to have you!{% endif %}
+            {% if tenant_member %}
+            <p>Great to have you!</p>
+            {% endif %}
             
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
