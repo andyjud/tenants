@@ -14,7 +14,7 @@
             
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
-                    <form method="POST" action="{% url 'member-role' request.tenant.id %}">
+                    <form method="POST" action="">
                         {% csrf_token %}
 
                         <div x-data="{ selectedRole: '', open: false }" class="relative">
