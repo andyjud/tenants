@@ -8,6 +8,8 @@
         {% if user.is_authenticated %}
             <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
 
+            {% if tenant_member %}Great to have you!{% endif %}
+            
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
                     <form method="POST" action="{% url 'member-role' request.tenant.id %}">
@@ -43,7 +45,7 @@
 
                 <div class="mb-6 w-1/2">
 
-                    {% if request.tenant.members %}
+                    {% if tenant_member %}
                     <div class="p-4 border border-gray-300 rounded-lg">
                         <div class="mb-6">
                             <h2 class="mb-1">Managers</h2>
