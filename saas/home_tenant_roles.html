@@ -25,15 +25,13 @@
                         
                             <div x-show="open" x-cloak @click.outside="open = false" class="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
                                 <ul>
-                                    <li @click="selectedRole = 'Manager'; open = false" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-                                        Manager
-                                    </li>
-                                    <li @click="selectedRole = 'Designer'; open = false" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-                                        Designer
-                                    </li>
-                                    <li @click="selectedRole = 'Programmer'; open = false" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-                                        Programmer
-                                    </li>
+                                    {% if member_roles %}
+                                        {% for key, label in member_roles %}
+                                        <li @click="selectedRole = '{{ label }}'; open = false" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+                                            {{ label }}
+                                        </li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         
