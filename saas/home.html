@@ -19,10 +19,10 @@
                         <div x-show="open" x-cloak @click.outside="open = false" class="absolute w-full border border-gray-300 rounded-lg shadow-lg z-10">
                             <ul>
                                 {% if user_tenants %}
-                                    {% for tenant in user_tenants %}
+                                    {% for user_tenant in user_tenants %}
                                     <li>
-                                        <a href = 'http://{{ tenant.schema_name }}.{{ domain }}' class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">
-                                            {{ tenant.name }}
+                                        <a href = 'http://{{ user_tenant.tenant.schema_name }}.{{ base_domain }}' class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">
+                                            {{ user_tenant.tenant.name }}
                                         </a>
                                     </li>
                                     {% endfor %}
