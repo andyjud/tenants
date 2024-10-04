@@ -6,13 +6,12 @@
         <h1>Welcome to {{ request.tenant.name }}</h1>
 
         {% if user.is_authenticated %}
-        <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
-            {% if not user.tenant_member %}
-            <p>To access this site, select your role:</p>
-            {% endif %}
-        {% endif %}
+            <h2>Hello {{ user.profile.name }}{% if user.tenant_member.is_admin %} - you are the Admin{% endif %}</h2>
 
-        {% if user.is_authenticated %}
+            {% if not user.tenant_member %}
+            <p>To access this site, contact the Admin.</p>
+            {% endif %}
+
             <div class="flex gap-6 mt-8">
                 <div class="w-1/2">
                     <form method="POST" action="{% url 'member-role' request.tenant.id %}">
@@ -47,11 +46,12 @@
                 </div>
 
                 <div class="mb-6 w-1/2">
-                    {% if user.tenant_member %}
+
+                    {% if request.tenant.members %}
                     <div class="p-4 border border-gray-300 rounded-lg">
                         <div class="mb-6">
                             <h2 class="mb-1">Managers</h2>
-                            {% for member in tenant_members %}
+                            {% for member in request.tenant.members.all %}
                                 {% if member.role == 'manager' %}
                                     <a class="block hover:underline pl-4" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
@@ -59,7 +59,7 @@
                         </div>
                         <div class="mb-6">
                             <h2 class="mb-1">Designers</h2>
-                            {% for member in tenant_members %}
+                            {% for member in request.tenant.members.all %}
                                 {% if member.role == 'designer' %}
                                     <a class="block hover:underline pl-4" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
@@ -67,7 +67,7 @@
                         </div>
                         <div>
                             <h2 class="mb-1">Programmers</h2>
-                            {% for member in tenant_members %}
+                            {% for member in request.tenant.members.all %}
                                 {% if member.role == 'programmer' %}
                                     <a class="block hover:underline pl-4" href="{% url 'profile' member.user.username %}">{{ member.user.profile.name }}</a>
                                 {% endif %}
