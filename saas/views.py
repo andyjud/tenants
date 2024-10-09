@@ -13,7 +13,9 @@ def home_view(request):
         tenant_form = TenantForm(request.POST)
         if tenant_form.is_valid():
             tenant = tenant_form.save()
-            call_command('migrate_schemas', schema_name=tenant.schema_name)
+            
+            # No need call_command actually
+            # call_command('migrate_schemas', schema_name=tenant.schema_name)
             
             domain = Domain.objects.create(
                 tenant=tenant,
